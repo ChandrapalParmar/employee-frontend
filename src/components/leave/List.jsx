@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Link, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { useAuth } from "../../context/authContext"
+import { useAuth } from "../../context/AuthContext"
 
 const List = () => {
   const [leaves,setLeaves] = useState(null)

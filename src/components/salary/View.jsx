@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { useAuth } from "../../context/authContext"
+import { useAuth } from "../../context/AuthContext"
 
 const View = () => {
     const [salaries,setSalaries] = useState(null)
