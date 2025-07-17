@@ -8,7 +8,6 @@ const Setting = () => {
     const navigate =useNavigate()
     const {user} =useAuth()
     const [setting,setSetting] = useState({
-        userId: user._id,
         oldPassword: "",
         newPassword: "",
         confirmPassword: "",
