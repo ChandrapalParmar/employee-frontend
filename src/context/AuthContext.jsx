@@ -1,55 +1,53 @@
-import axios from "axios"
-import { createContext, useContext, useEffect, useState } from "react"
+// src/context/AuthContext.jsx
+import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const UserContext= createContext()
+const AuthContext = createContext();
 
-const AuthContext = ({children}) => {
-    const [user,setUser] = useState(null)
-    const [loading,setLoading] = useState(true)
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        const verifyUser = async()=>{
-            try{
-                const token =localStorage.getItem('token')
-                if(token){
-                     const response =await axios.get('https://employee-backend-nu.vercel.app/api/auth/verify',{
-                        headers:{
-                            "Authorization": `Bearer ${token}`
-                        }
-                     })
-                    if(response.data.success){
-                      setUser(response.data.user)
-                }
-                } else{
-                      setUser(null)
-                      setLoading(false)
-                }
-               
-            } catch(error){
-                if(error.response && !error.response.data.error){
-                   setUser(null)
-                }                
-            } finally{
-                setLoading(false)
-            }
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const response = await axios.get("https://employee-backend-nu.vercel.app/api/auth/verify", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.data.success) {
+            setUser(response.data.user);
+          }
+        } else {
+          setUser(null);
         }
-        verifyUser()
-    },[])
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const login=(user)=>{
-        setUser(user) 
-    }
-    const logout=()=>{
-        setUser(null)
-        localStorage.removeItem("token")
-    }
+    verifyUser();
+  }, []);
+
+  const login = (user) => {
+    setUser(user);
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
 
   return (
-    <UserContext.Provider value={{user,login,logout,loading}}>
-        {children}
-    </UserContext.Provider>
-  )
-} 
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-export const useAuth=()=> useContext(UserContext)
-export default AuthContext
+export const useAuth = () => useContext(AuthContext);

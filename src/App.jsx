@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import RoleBaseRoutes from "./utils/RoleBaseRoutes";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext"; // ✅ Now this works
 
-function App() {
-
+function App() { 
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -14,7 +13,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-  )
+  );
 }
 
 export default App;
