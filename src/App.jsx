@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login.jsx";
-import RoleBaseRoutes from "./utils/RoleBaseRoutes.jsx";
-import { AuthProvider } from "./context/AuthContext.jsx";
+import RoleBaseRoutes from "./utils/RoleBaseRoutes";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 
