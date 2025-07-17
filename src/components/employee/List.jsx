@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { columns, EmployeeButtons } from "../../utils/EmployeeHelper";
+import { columns, EmployeeButtons } from "../../utils/EmployeeHelper.jsx";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 
