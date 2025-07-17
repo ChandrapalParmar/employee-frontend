@@ -21,6 +21,8 @@ import Setting from './components/employeeDashboard/Setting.jsx'
 import Table from './components/leave/Table.jsx'
 import Detail from './components/leave/Detail.jsx'
 
+import Unauthorized from "./components/Unauthorized";
+
 function App() {
 
   return (
@@ -71,6 +73,8 @@ function App() {
       <Route path='/employee-dashboard/add-leave' element={<AddLeave/>} ></Route>
       <Route path='/employee-dashboard/salary/:id' element={<ViewSalary/>} ></Route>
       <Route path='/employee-dashboard/setting' element={<Setting/>} ></Route>
+
+      <Route path="/unauthorized" element={<Unauthorized />} />
 
        </Route>
     </Routes>

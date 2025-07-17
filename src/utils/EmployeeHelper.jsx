@@ -38,7 +38,7 @@ export const EmployeeButtons = ({ Id }) => {
 // 👇 Table Columns
 export const columns = [
   {
-    name: "$ No",
+    name: "S No",
     selector: (row) => row.sno,
     width: "70px",
   },
@@ -50,14 +50,15 @@ export const columns = [
   },
   {
     name: "Image",
-    selector: (row) => (
-      <img
-        src={`https://employee-backend-nu.vercel.app/${row.profileImage}`} // ✅ Cloud path fix
-        alt="profile"
-        width={40}
-        className="rounded-full"
-      />
-    ),
+    // selector: (row) => (
+    //   <img
+    //     src={`https://employee-backend-nu.vercel.app/${row.profileImage}`} // ✅ Cloud path fix
+    //     alt="profile"
+    //     width={40}
+    //     className="rounded-full"
+    //   />
+    // ),
+    selector: (row) => row.profileImage,
     width: "90px",
   },
   {
@@ -80,7 +81,7 @@ export const columns = [
 
 // 👇 Fetch departments
 export const fetchDepartments = async () => {
-  let departments;
+  // let departments;
   try {
     const response = await axios.get(
       "https://employee-backend-nu.vercel.app/api/department",
@@ -88,22 +89,23 @@ export const fetchDepartments = async () => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        timeout: 10000,
       }
     );
     if (response.data.success) {
-      departments = response.data.departments;
+      return response.data.departments || [];
     }
+    return [];
   } catch (error) {
-    if (error.response && !error.response.data.success) {
-      alert(error.response.data.error);
-    }
+    alert(error.response?.data?.error || "Failed to fetch departments.");
+    return [];
   }
-  return departments;
+
 };
 
 // 👇 Get employees for salary form
 export const getEmployees = async (id) => {
-  let employees;
+  // let employees;
   try {
     const response = await axios.get(
       `https://employee-backend-nu.vercel.app/api/employee/department/${id}`,
@@ -111,15 +113,16 @@ export const getEmployees = async (id) => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        timeout: 10000,
       }
     );
     if (response.data.success) {
-      employees = response.data.employees;
+      return response.data.employees || [];
     }
+    return [];
   } catch (error) {
-    if (error.response && !error.response.data.success) {
-      alert(error.response.data.error);
-    }
+    alert(error.response?.data?.error || "Failed to fetch employees.");
+    return [];
   }
-  return employees;
+  
 };
